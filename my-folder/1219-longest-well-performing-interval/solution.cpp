@@ -2,8 +2,7 @@ class Solution {
 public:
     int longestWPI(vector<int>& hours) {
         int n=hours.size();
-    
-    unordered_map<int,int> mp;
+        unordered_map<int,int> mp;
     int result=0,sum=0;
     for(int i=0;i<n;i++) {
         if(hours[i]>8) {
@@ -23,11 +22,35 @@ public:
             mp[sum]=i;
     }
     return result;
+
     }
 };
 
 
 /*
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         int n=hours.size();
         for(auto it:hours){ if(it>8) it=1; else it=0;}
         unordered_map <int,int> m;
