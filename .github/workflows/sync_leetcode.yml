@@ -16,6 +16,7 @@ jobs:
           github-token: ${{ github.token }}
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
-          destination-folder: Stack-SlidingWindow-Queue
+          destination-folder: Recursion-and-DynamicProgramming
           verbose: true
           commit-header: '[LeetCode Sync]'
+# destination-folder: Stack-SlidingWindow-Queue
