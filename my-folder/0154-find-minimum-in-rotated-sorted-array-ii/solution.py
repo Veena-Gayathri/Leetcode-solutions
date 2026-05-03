@@ -1,20 +1,20 @@
-from typing import List
 
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        left, right = 0, len(nums) - 1
+        start , end = 0 , len(nums)-1
 
-        while left < right:
-            mid = (left + right) // 2
+        while start<end:
+            mid = start + (end- start)//2
+            if nums[end] > nums[mid] :
+                end = mid
+            elif nums[end]< nums[mid]:
+                #this part is not sorted, check to the right
+                start = mid+1
+            else:
+                end-=1
+            
 
-            if nums[mid] < nums[right]:
-                # Minimum is in the left half, including mid
-                right = mid
-            elif nums[mid] > nums[right]:
-                # Minimum is in the right half
-                left = mid + 1
-            else:  # nums[mid] == nums[right]
-                # Cannot decide, shrink right
-                right -= 1
+        return nums[start]
+                
 
-        return nums[left]
+
