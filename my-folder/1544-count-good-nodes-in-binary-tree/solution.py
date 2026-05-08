@@ -6,22 +6,21 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        q = deque([(root, root.val)])
-        res = 0
+        # idea: count with dfs while keeping track of max with each node.
+        count = 0
+        def dfs(node, mx = float('-inf')):
+            if not node:
+                return
+            
+            nonlocal count
+            if node.val >= mx:
+                count += 1
+                mx = node.val
+            
+            dfs(node.left, mx)
+            dfs(node.right, mx)
         
-        while q:
-            node, max_so_far = q.popleft()
-            
-            if node.val >= max_so_far:
-                res += 1
-            
-            new_max = max(max_so_far, node.val)
-            
-            if node.left:
-                q.append((node.left, new_max))
-            if node.right:
-                q.append((node.right, new_max))
-        
-        return res
+        dfs(root)
+        return count
 
-        
+
