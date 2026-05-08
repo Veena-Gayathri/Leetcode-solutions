@@ -6,22 +6,31 @@
 #         self.right = right
 class Solution:
     def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
-        self.prev = None
-        self.ans = float('inf')
+        # Initialize variables for previous value and minimum difference
+        prev = float('-inf')  # Initialize prev to negative infinity
+        min_diff = float('inf')  # Initialize min_diff to positive infinity
         
-        def inorder(node):
-            if not node:
+        def inorderTraversal(root):
+            nonlocal prev, min_diff
+            if not root:
                 return
             
-            inorder(node.left)
+            # In-order traversal: visit the left subtree
+            if root.left:
+                inorderTraversal(root.left)
             
-            if self.prev is not None:
-                self.ans = min(self.ans, node.val - self.prev)
+            # Compare the current node's value with the previous value
+            min_diff = min(min_diff,root.val - prev)
             
-            self.prev = node.val
+            # Update the previous value to the current node's value
+            prev = root.val
             
-            inorder(node.right)
+            # In-order traversal: visit the right subtree
+            if root.right:
+                inorderTraversal(root.right)
+                
+        # Start the in-order traversal from the root of the binary tree
+        inorderTraversal(root)
         
-        inorder(root)
-        return self.ans
-
+        # Return the minimum difference between any two nodes in the tree
+        return min_diff
