@@ -1,28 +1,29 @@
-# class Solution:
-#     def predictTheWinner(self, nums: list[int]) -> bool:
-#         def helper(left, right):
-#             if left == right:
-#                 return nums[left]
-#             return max(nums[left] - helper(left + 1, right), nums[right] - helper(left, right - 1))
-#         return helper(0, len(nums) - 1) >= 0
-
-
 class Solution:
-    def score(self, nums, l, r, dp):
-        if dp[l][r] != -1:
-            return dp[l][r]
-        if l == r:
-            return nums[l]
+    def predictTheWinner(self, nums: list[int]) -> bool:
+
+        def helper(left, right):
+            if left == right:
+                return nums[left]
+            return max(nums[left] - helper(left + 1, right), nums[right] - helper(left, right - 1))
+        return helper(0, len(nums) - 1) >= 0
+
+
+# class Solution:
+#     def score(self, nums, l, r, dp):
+#         if dp[l][r] != -1:
+#             return dp[l][r]
+#         if l == r:
+#             return nums[l]
         
-        left = nums[l] - self.score(nums, l + 1, r, dp)
-        right = nums[r] - self.score(nums, l, r - 1, dp)
-        dp[l][r] = max(left, right)
+#         left = nums[l] - self.score(nums, l + 1, r, dp)
+#         right = nums[r] - self.score(nums, l, r - 1, dp)
+#         dp[l][r] = max(left, right)
         
-        return dp[l][r]
+#         return dp[l][r]
     
-    def predictTheWinner(self, nums):
-        n = len(nums)
-        dp = [[-1 for _ in range(n)] for _ in range(n)]
+#     def predictTheWinner(self, nums):
+#         n = len(nums)
+#         dp = [[-1 for _ in range(n)] for _ in range(n)]
         
-        return self.score(nums, 0, n - 1, dp) >= 0
+#         return self.score(nums, 0, n - 1, dp) >= 0
 
